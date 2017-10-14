@@ -18,10 +18,8 @@ app.use(express.static(path.join(__dirname, "/../public"))) //public folder!
 
 //routes
 app.get('/', function (req, res) {
-    const data = JSON.parse(fs.readFileSync('./data/bitcoinPrice.json', 'utf8'));
-    res.render("index", {
-        data
-    })
+    const data = JSON.parse(fs.readFileSync(path.join(__dirname, "./data/bitcoinPrice.json"), 'utf8'))
+    res.render("index")
 })
 
 //Start Server
