@@ -1,9 +1,9 @@
 require('dotenv').config()
 const express = require('express')
-const fs = require('fs')
 const path = require('path')
 const logger = require('morgan')
 const bodyParser = require('body-parser')
+const btcService = require('./service/bitcoinService')
 
 const app = express()
 
@@ -20,8 +20,15 @@ app.use(express.static(path.join(__dirname, '/../public'))) // public folder!
 
 // routes
 app.get('/', (req, res) => {
-  const data = JSON.parse(fs.readFileSync(path.join(__dirname, './data/bitcoinPrice.json'), 'utf8'))
   res.render('index')
+})
+
+// routes
+app.get('/bitcoinprice', async (req, res) => {
+  const bitcoinData = await btcService.getBitcoinData()
+  res.render('bitcoinprice', {
+    bitcoinData,
+  })
 })
 
 // Start Server
