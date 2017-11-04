@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require("express")
 const fs = require("fs")
 const path = require("path")
@@ -9,7 +10,7 @@ const app = express()
 app.set("views", path.join(__dirname, "views"))
 app.set("view engine", "pug")
 
-app.use(logger("debug"))
+app.use(logger(process.env.LOG_ENV))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
     extended: false,

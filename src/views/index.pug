@@ -1,11 +1,8 @@
-html
-  head
-    title Line Chart Multiple Axes
-    style(type='text/css').
-      /* Chart.js */
-      @-webkit-keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}@keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}.chartjs-render-monitor{-webkit-animation:chartjs-render-animation 0.001s;animation:chartjs-render-animation 0.001s;}
-    script(src='../../utils.js')
+extends layouts/_layout.pug
+
+block content
   body
     canvas#canvas.chartjs-render-monitor(style='display: block; width: 1000px; height: 500px;', width='1000', height='500')      
-    script(src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js')
-    script(src='../../public/js/chartJS_data.js')
+    
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js')
+  script(src='../../public/js/chartJS_data.js')
