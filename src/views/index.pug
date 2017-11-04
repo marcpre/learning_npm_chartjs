@@ -1,8 +1,27 @@
 extends layouts/_layout.pug
 
 block content
-  body
-    canvas#canvas.chartjs-render-monitor(style='display: block; width: 1000px; height: 500px;', width='1000', height='500')      
-    
-  script(src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js')
-  script(src='../../public/js/chartJS_data.js')
+  .page-title
+    div
+      h1
+        i.fa.fa-dashboard
+        |  Markets
+      p A free and modular admin template
+
+    div
+      ul.breadcrumb
+        li
+          i.fa.fa-home.fa-lg
+        li
+          a(href='#') Markets
+
+  .row
+
+    .col-md-12
+      .card
+        h3.card-title Getting Started
+          canvas#canvas.chartjs-render-monitor(style='display: block; width: 1000px; height: 500px;', width='1000', height='500')      
+
+block specific-js
+  script(type='text/javascript', src="js/chartJS_data.js") 
+  script(type='text/javascript', src="js/plugins/chart.js") 
