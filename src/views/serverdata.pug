@@ -1,0 +1,42 @@
+extends layouts/_layout.pug
+
+block content
+  .page-title
+    div
+      h1
+        i.fa.fa-dashboard
+        |  Load data from server example
+
+  .row
+    .col-md-12
+      .card   
+        h3.card-title Line Chart
+        .embed-responsive.embed-responsive-16by9
+          canvas.embed-responsive-item(id="lineChartDemo")
+
+block specific-js
+  script(type='text/javascript', src="js/plugins/chart.js") 
+  script(type='text/javascript').
+    $( document ).ready(function() {
+      var data = {
+        labels: ["January", "February", "March", "April", "May", "June", "July"],
+        datasets: [
+          {
+            label: "My First dataset",
+            fillColor: "rgba(220,220,220,0.2)",
+            strokeColor: "rgba(220,220,220,1)",
+            pointColor: "rgba(220,220,220,1)",
+            pointStrokeColor: "#fff",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(220,220,220,1)",
+            data: #{ result }
+          }
+        ]
+      }
+
+      var ctxl = $("#lineChartDemo").get(0).getContext("2d")
+      var myLineChart = new Chart(ctxl, {
+        type: 'line',
+        data: data
+      })
+    })

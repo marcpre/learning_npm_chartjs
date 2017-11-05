@@ -7,6 +7,11 @@ const btcService = require('./service/bitcoinService')
 
 const app = express()
 
+process.on('uncaughtException', err =>
+  console.error('uncaught exception: ', err))
+process.on('unhandledRejection', (reason, p) =>
+  console.error('unhandled rejection: ', reason, p))
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'pug')
@@ -24,11 +29,24 @@ app.get('/', (req, res) => {
 })
 
 // routes
-app.get('/bitcoinprice', async (req, res) => {
+app.get('/bitcoinprice', async(req, res) => {
   const bitcoinData = await btcService.getBitcoinData()
   res.render('bitcoinprice', {
     bitcoinData,
   })
+})
+
+// routes
+app.get('/serverdata', (req, res) => {
+
+  let chartData = []
+  for (let i = 0; i < 7; i++) {
+    chartData.push(Math.random() * 50)
+  }
+
+  const result = JSON.stringify(chartData)
+
+  res.render('serverdata', { result: result })
 })
 
 // Start Server
