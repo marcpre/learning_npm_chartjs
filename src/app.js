@@ -39,7 +39,7 @@ app.get('/bitcoinprice', async(req, res) => {
 // routes
 app.get('/serverdata', (req, res) => {
   const chartData = []
-  for (let i = 0; i < 7; i++) {
+  for (let i = 0; i < 7; i += 1) {
     chartData.push(Math.random() * 50)
   }
 
