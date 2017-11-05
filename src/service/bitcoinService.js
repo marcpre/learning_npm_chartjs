@@ -3,7 +3,7 @@ const path = require('path')
 
 async function getBitcoinData() {
   const bitcoinData = JSON.parse(fs.readFileSync(path.join(__dirname, '../data/bitcoinPrice.json'), 'utf8'))
-  console.log(bitcoinData)
+
   const date = []
   const averagePrice = []
   const marketCap = []
@@ -16,7 +16,7 @@ async function getBitcoinData() {
     date.push(Date.parse(bitcoinData[m].Date))
   }
   const result = [date, marketCap, averagePrice]
-/*
+  /*
   const lineChartData = {
     labels: date,
     datasets: [{

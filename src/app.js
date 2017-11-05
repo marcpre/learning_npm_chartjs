@@ -4,6 +4,7 @@ const path = require('path')
 const logger = require('morgan')
 const bodyParser = require('body-parser')
 const btcService = require('./service/bitcoinService')
+const scheduler = require('./scheduler/scheduler')
 
 const app = express()
 
@@ -22,6 +23,9 @@ app.use(bodyParser.urlencoded({
   extended: false,
 }))
 app.use(express.static(path.join(__dirname, '/../public'))) // public folder!
+
+// running scheduler
+const apiData = scheduler.runScheduler()
 
 // routes
 app.get('/', (req, res) => {
@@ -46,6 +50,13 @@ app.get('/serverdata', (req, res) => {
   const result = JSON.stringify(chartData)
 
   res.render('serverdata', { result })
+})
+
+// routes
+app.get('/realTime', (req, res) => {
+  console.log(`test: ${apiData}`)
+
+  res.render('realtime', { apiData })
 })
 
 // Start Server

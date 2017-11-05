@@ -1,0 +1,55 @@
+extends layouts/_layout.pug
+
+block content
+  .page-title
+    div
+      h1
+        i.fa.fa-dashboard
+        |  Load data real time
+
+  .row
+    .col-md-12
+      .card   
+        h3.card-title Real-Time Chart
+        .embed-responsive.embed-responsive-16by9
+          canvas.embed-responsive-item(id="lineChartDemo")
+
+block specific-js
+  script(type='text/javascript', src="js/plugins/chart.js") 
+  script(type='text/javascript').
+    $( document ).ready(function() {
+      var data = {
+        //labels: ["January", "February", "March", "April", "May", "June", "July"],
+        datasets: [
+          {
+            label: "My First dataset",
+            fillColor: "rgba(220,220,220,0.2)",
+            strokeColor: "rgba(220,220,220,1)",
+            pointColor: "rgba(220,220,220,1)",
+            pointStrokeColor: "#fff",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(220,220,220,1)",
+            data: #{ result }
+          }
+        ],
+      }
+      var options = {
+        animation: false,
+        //Boolean - If we want to override with a hard coded scale
+        scaleOverride: true,
+        //** Required if scaleOverride is true **
+        //Number - The number of steps in a hard coded scale
+        scaleSteps: 3,
+        //Number - The value jump in the hard coded scale
+        scaleStepWidth: 3,
+        //Number - The scale starting value
+        scaleStartValue: 0
+      }
+
+      var ctxl = $("#lineChartDemo").get(0).getContext("2d")
+      var myLineChart = new Chart(ctxl, {
+        type: 'line',
+        data: data,
+        options: options,
+      })
+    })
