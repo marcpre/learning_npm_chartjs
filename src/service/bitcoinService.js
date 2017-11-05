@@ -9,8 +9,8 @@ async function getBitcoinData() {
   const marketCap = []
 
   for (let m = 0; m < bitcoinData.length; m++) {
-    let subPrice = (parseFloat(bitcoinData[m].High) - parseFloat(bitcoinData[m].Low))
-    let price = subPrice / 2
+    const subPrice = (parseFloat(bitcoinData[m].High) - parseFloat(bitcoinData[m].Low))
+    const price = subPrice / 2
     averagePrice.push(price)
     marketCap.push(bitcoinData[m]['Market Cap'])
     date.push(Date.parse(bitcoinData[m].Date))

@@ -38,15 +38,14 @@ app.get('/bitcoinprice', async(req, res) => {
 
 // routes
 app.get('/serverdata', (req, res) => {
-
-  let chartData = []
+  const chartData = []
   for (let i = 0; i < 7; i++) {
     chartData.push(Math.random() * 50)
   }
 
   const result = JSON.stringify(chartData)
 
-  res.render('serverdata', { result: result })
+  res.render('serverdata', { result })
 })
 
 // Start Server
