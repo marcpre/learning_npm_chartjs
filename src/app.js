@@ -30,10 +30,11 @@ app.get('/', (req, res) => {
 
 // routes
 app.get('/bitcoinprice', async(req, res) => {
-  const bitcoinData = await btcService.getBitcoinData()
-  res.render('bitcoinprice', {
-    bitcoinData,
-  })
+  const priceData = await btcService.getBitcoinData()
+  const date = priceData[0]
+  const marketCap = priceData[1]
+  const averagePrice = priceData[2]
+  res.render('bitcoinprice', { date, marketCap, averagePrice })
 })
 
 // routes
@@ -42,7 +43,6 @@ app.get('/serverdata', (req, res) => {
   for (let i = 0; i < 7; i += 1) {
     chartData.push(Math.random() * 50)
   }
-
   const result = JSON.stringify(chartData)
 
   res.render('serverdata', { result })

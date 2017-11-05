@@ -15,7 +15,8 @@ async function getBitcoinData() {
     marketCap.push(bitcoinData[m]['Market Cap'])
     date.push(Date.parse(bitcoinData[m].Date))
   }
-
+  const result = [date, marketCap, averagePrice]
+/*
   const lineChartData = {
     labels: date,
     datasets: [{
@@ -34,8 +35,8 @@ async function getBitcoinData() {
       yAxisID: 'y-axis-2',
     }],
   }
-
-  return lineChartData
+*/
+  return result
 }
 
 module.exports = {

@@ -5,47 +5,48 @@ block content
     div
       h1
         i.fa.fa-dashboard
-        |  Bitcoin Price Example
+        |  Load data directly from json file
 
   .row
     .col-md-12
-      .card
-        h3.card-title Loading local bitcoin file
+      .card   
+        h3.card-title Line Chart
         .embed-responsive.embed-responsive-16by9
-          canvas#canvas.chartjs-render-monitor(style='display: block; width: 1000px; height: 500px;', width='1000', height='500')      
-        
+          canvas.embed-responsive-item(id="lineChartDemo")
+
 block specific-js
   script(type='text/javascript', src="js/plugins/chart.js") 
   script(type='text/javascript').
-    window.onload = function () {
-      var ctx = document.getElementById("canvas").getContext("2d");
-      window.myLine = Chart.Line(ctx, {
-        data: bitcoinData,
-        options: {
-          responsive: true,
-          hoverMode: 'index',
-          stacked: false,
-          title: {
-            display: true,
-            text: 'Bitcoin Price and MarketCap'
-          },
-          scales: {
-            yAxes: [{
-              type: "linear", // only linear but allow scale type registration. This allows extensions to exist solely for log scale for instance
-              display: true,
-              position: "left",
-              id: "y-axis-1",
-            }, {
-              type: "linear", // only linear but allow scale type registration. This allows extensions to exist solely for log scale for instance
-              display: true,
-              position: "right",
-              id: "y-axis-2",
-              // grid line settings
-              gridLines: {
-                drawOnChartArea: false, // only want the grid lines for one axis to show up
-              },
-            }],
+    $( document ).ready(function() {
+      var data = {
+        labels: [ #{ date } ],
+        datasets: [
+          {
+            label: "My First dataset",
+            fillColor: "rgba(220,220,220,0.2)",
+            strokeColor: "rgba(220,220,220,1)",
+            pointColor: "rgba(220,220,220,1)",
+            pointStrokeColor: "#fff",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(220,220,220,1)",
+            data: [ #{ averagePrice } ]
+          }, 
+          {
+            label: "My First dataset",
+            fillColor: "rgba(220,220,220,0.2)",
+            strokeColor: "rgba(220,220,220,1)",
+            pointColor: "rgba(220,220,220,1)",
+            pointStrokeColor: "#fff",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(220,220,220,1)",
+            data: [ #{ marketCap } ]
           }
-        }
-      });
-    };
+        ]
+      }
+
+      var ctxl = $("#lineChartDemo").get(0).getContext("2d")
+      var myLineChart = new Chart(ctxl, {
+        type: 'line',
+        data: data
+      })
+    })
